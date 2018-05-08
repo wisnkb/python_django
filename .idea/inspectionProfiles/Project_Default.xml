@@ -12,6 +12,7 @@
       <option name="ignoredIdentifiers">
         <list>
           <option value="blog.models.*" />
+          <option value="blog.forms" />
         </list>
       </option>
     </inspection_tool>

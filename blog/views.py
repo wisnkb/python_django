@@ -1,6 +1,8 @@
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
+
+from blog.modelforms import PostModelForm
 from .models import Post
 
 # 글목록 조회
@@ -15,3 +17,12 @@ def post_list(request):
 def post_detail(request,pk):
     post = get_object_or_404(Post,pk=pk)
     return render(request,'blog/post_detail.html',{'post':post})
+
+# 글등록
+def post_new(request):
+    form = PostModelForm()
+    return render(request, 'blog/post_edit.html', {'form': form})
+
+
+
+
