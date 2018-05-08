@@ -1,31 +1,12 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <title>Django`s Blog</title>
-</head>
-<body>
-    <div>
-        <h1><a href="/">Django`s Blog App</a></h1>
-    </div>
-    <div>
-        <p>Published Date : 2018-05-07</p>
-        <h2><a href="">My First Title</a> </h2>
-        <p>Sample Text</p>
-    </div>
-    <div>
-        <p>Published Date : 2018-05-07</p>
-        <h2><a href="">My Second Title</a> </h2>
-        <p>Second Sample Text</p>
-    </div>
-    <div>------------------------------------------</div>
+{% extends 'blog/base.html' %}
+{% block content %}
     {% for post in posts %}
-        <div>
-             <p>Published Date : {{post.published_date|date:"Y-m-d"}}</p>
-            <h2><a href="">{{post.title}}</a> </h2>
+        <div class="post">
+            <div class="date">
+                <p>Published Date : {{post.published_date|date:"Y-m-d g:i a"}}</p>
+            </div>
+            <h2><a href="{% url 'post_detail' pk=post.id %}">{{post.title}}</a></h2>
             <p>{{post.text|linebreaksbr}}</p>
         </div>
-
     {% endfor %}
-</body>
-</html>
+{% endblock %}
