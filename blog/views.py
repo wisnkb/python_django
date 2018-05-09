@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
@@ -52,6 +53,7 @@ def post_new_form(request):
         form = PostForm()
     return render(request,'blog/post_form.html',{'form':form})
 
+@login_required
 def post_edit(request, pk):
     post = get_object_or_404(Post, pk=pk)
     if request.method == "POST":
@@ -65,3 +67,9 @@ def post_edit(request, pk):
     else:
         form = PostModelForm(instance=post)
         return render(request, 'blog/post_edit.html', {'form': form})
+
+@login_required
+def post_remove(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    post.delete()
+    return redirect('post_list')
